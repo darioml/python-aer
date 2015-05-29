@@ -3,6 +3,10 @@ import numpy as np
 
 import os, datetime
 
+from pprint import pprint
+
+import matplotlib.pyplot as plt
+
 
 class pAER:
 	def __init__(self, filename, max_events=1e6):
@@ -62,3 +66,7 @@ if __name__ == "__main__":
 	hello = pAER('/Users/darioml/src/fyp-aedata-matlab/test.aedat', max_events=10)
 
 	(x,y,t) = hello.unpackData(hello.data)
+
+
+	plt.plot(y,x)
+	plt.show()
