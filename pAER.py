@@ -1,11 +1,11 @@
 import math
 import numpy as np
 
-import os, datetime
+import os, datetime,time
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from matplotlib  import cm
+from matplotlib import cm
 
 
 class pAER:
@@ -61,27 +61,41 @@ class pAER:
 			y[i] = (d >> 0x8) & 0x7F
 		return (x,y,t)
 
-	def interactiveAnimation(self,data,step=5000):
+
+	def makeSparse(self, data, ratio):
+		indexes = np.random.randint(0,len(data),math.floor(len(data)/ratio))
+		indexes.sort()
+		return data[indexes]
+
+	def interactiveAnimation(self,x,y,t,step=5000,limits=(0,128),pause=0):
 		plt.ion()
 		fig = plt.figure(figsize=(6,6))
 		plt.show()
 
 		ax = fig.add_subplot(111)
-		ax.set_xlim(0,128)
-		ax.set_ylim(0,128)
+		ax.set_xlim(limits)
+		ax.set_ylim(limits)
 
 		start = 0;
 		end = step-1;
 		ax.scatter(x[start:end],y[start:end],s=20,c=t[start:end], marker = 'o', cmap = cm.jet );
 
-		for i in range(200):
+		while(start < len(x)):
+			time.sleep(pause)
 			ax.clear()
-			ax.set_xlim(0,128)
-			ax.set_ylim(0,128)
+			ax.set_xlim(limits)
+			ax.set_ylim(limits)
 			ax.scatter(x[start:end],y[start:end],s=20,c=t[start:end], marker = 'o', cmap = cm.jet );
 			start = start + step;
 			end   = end   + step;
 			plt.draw()
+
+
+	def convertTo16x16(self,x,y,t):
+		new_x = np.round(x/8)
+		new_y = np.round(y/8)
+		return (new_x, new_y, t)
+
 
 	# def betterAnimation(self,data,step=5000):
 		# start = 0;
