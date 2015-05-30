@@ -1,3 +1,4 @@
+from PIL import Image
 import math
 import numpy as np
 
@@ -95,6 +96,44 @@ class pAER:
 		new_x = np.round(x/8)
 		new_y = np.round(y/8)
 		return (new_x, new_y, t)
+
+	def makeImgMatrix(self,x,y,t,dim=(128,128)):
+		image = np.zeros(dim)
+		events= np.zeros(dim)
+
+		for i in range(len(x)):
+			image[y[i]-1,x[i]-1]  -= t[i]-0.5
+			events[y[i]-1,x[i]-1] += 1
+
+		# http://stackoverflow.com/questions/26248654/numpy-return-0-with-divide-by-zero
+		np.seterr(divide='ignore', invalid='ignore')
+		
+		result = 0.5+(image / events)
+		result[events == 0] = 0.5
+		return result
+		
+		# np.set_printoptions(threshold='nan')
+		# from pprint import pprint
+		# pprint(image)
+
+	def saveAsPngs(self,x,y,t,prepend,path="",step=3000,dim=(128,128)):
+		# im = Image.fromarray(A)
+		# im.save("your_file.jpeg")
+
+		idx = 0
+		start = 0;
+		end = step-1;
+		while(start < len(x)):
+			image = self.makeImgMatrix(x[start:end],y[start:end],t[start:end], dim=dim)
+			img_arr = (image*255).astype('uint8')
+			im = Image.fromarray(img_arr)
+			im.save(path+prepend+("%05d" % idx)+".png")
+			idx += 1
+
+			# plt.imshow(self.makeImgMatrix(x[start:end],y[start:end],t[start:end]), cmap = cm.Greys_r)
+			# plt.savefig(path+prepend+("%05d" % idx)+".png", transparent=True)
+			start = start + step;
+			end   = end   + step;
 
 
 	# def betterAnimation(self,data,step=5000):
