@@ -1,5 +1,6 @@
 from pAER import pAER
 import numpy as np
+import scipy.io as io
 
 file1 = '../fyp-aedata-matlab/left_to_right_1.aedat'
 file2 = '../fyp-aedata-matlab/right_to_left_1.aedat'
@@ -47,4 +48,5 @@ final_ts = np.concatenate((t_1,t_2,t_3,t_4))
 data_16_16 = lib.packData(x,y,z)
 
 # save!
+io.savemat('all_directions.mat', {'X':x, 'Y':y, 't': z, 'ts': final_ts})
 lib.save('all_directions.aedat', data_16_16, final_ts)

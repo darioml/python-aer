@@ -16,5 +16,3 @@ lib.save('downsample_left_to_right_1_1.aedat', p_data, sparse_ts)
 
 
 # (x16,y16,t16) = lib.convertTo16x16(x,y,z)
-
-
