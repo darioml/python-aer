@@ -1,2 +1,8 @@
 *.DS_Store
 *.pyc
+.idea
+*.aedat
+*.mat
+
+results*
+test
