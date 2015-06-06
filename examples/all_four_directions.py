@@ -1,6 +1,5 @@
 import paer
 import numpy as np
-import scipy.io as io
 
 file1 = '../fyp-aedata-matlab/left_to_right_1.aedat'
 file2 = '../fyp-aedata-matlab/right_to_left_1.aedat'

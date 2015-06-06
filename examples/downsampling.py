@@ -1,4 +1,4 @@
-import src as paer
+import paer
 
 file = '../fyp-aedata-matlab/left_to_right_1.aedat'
 
