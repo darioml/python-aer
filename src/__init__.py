@@ -1,3 +1,9 @@
+"""
+Author: Dario ML
+Program: src/__init__.py
+Description: main file for python-ae
+"""
+
 from PIL import Image
 import math
 import numpy as np

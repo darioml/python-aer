@@ -8,9 +8,9 @@ Description: Setup and install TD algorithms.
 
 from distutils.core import setup
 
-setup(name='paer',
-    version='0.01',
-    author="Dario Magliocchetti-Lombi",
+setup(name='python-aer',
+    version='0.1.1',
+    author="Dario Magliocchetti",
     author_email="darioml1911@gmail.com",
     url="https://github.com/darioml/pAER-python-aer-lib",
     description='Python Address Event Representation (AER) Library',
@@ -27,8 +27,9 @@ setup(name='paer',
         "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha"
     ],
-    install_requires=[
-        'numpy',
-        'scipy',
-        'matplotlib'
-    ])
+    # install_requires=[
+    #     'numpy',
+    #     'scipy',
+    #     'matplotlib'
+    # ]
+      )

@@ -1,6 +1,6 @@
 import paer
 
-file = '../fyp-aedata-matlab/left_to_right_1.aedat'
+file = '/path/to/left_to_right_1.aedat'
 
 lib = paer.aefile(file, max_events=750001)
 data = paer.aedata(lib)

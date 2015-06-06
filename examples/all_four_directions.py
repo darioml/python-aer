@@ -1,10 +1,11 @@
 import paer
 import numpy as np
 
-file1 = '../fyp-aedata-matlab/left_to_right_1.aedat'
-file2 = '../fyp-aedata-matlab/right_to_left_1.aedat'
-file3 = '../fyp-aedata-matlab/top_to_bottom_1.aedat'
-file4 = '../fyp-aedata-matlab/bottom_to_top_1.aedat'
+base_dir = '/path/to/some/dir/'
+file1 = 'left_to_right_1.aedat'
+file2 = 'right_to_left_1.aedat'
+file3 = 'top_to_bottom_1.aedat'
+file4 = 'bottom_to_top_1.aedat'
 
 # Each ball movement should be .5s long
 animation_time = 0.2
@@ -48,19 +49,3 @@ d1.save_to_mat('test_1.mat')
 d2.save_to_mat('test_2.mat')
 d3.save_to_mat('test_3.mat')
 d4.save_to_mat('test_4.mat')
-
-
-# # I also want a mat file for each of the directions!
-# def save_to_mat_16_16(filename, data, ts):
-#     (x,y,z) = lib.unpackData(data)
-#     (x,y,z) = lib.convertTo16x16(x,y,z)
-#     io.savemat(filename, {'X':x, 'Y':y, 't': z, 'ts': ts})
-#
-# save_to_mat_16_16('norm_l2r.mat', d_1, t_1)
-# save_to_mat_16_16('norm_r2l.mat', d_2, t_2)
-# save_to_mat_16_16('norm_t2b.mat', d_3, t_3)
-# save_to_mat_16_16('norm_b2t.mat', d_4, t_4)
-#
-# # save!
-# io.savemat('all_directions.mat', {'X':x, 'Y':y, 't': z, 'ts': final_ts})
-# lib.save('all_directions.aedat', data_16_16, final_ts)
