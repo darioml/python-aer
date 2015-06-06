@@ -1,11 +1,10 @@
 from PIL import Image
 import math
 import numpy as np
+import scipy.io
 import os,time
 import matplotlib.pyplot as plt
 from matplotlib import cm
-
-
 
 class aefile(object):
     def __init__(self, filename, max_events=1e6):
@@ -50,19 +49,26 @@ class aefile(object):
 
             return data, timestamps
 
-    def save(self, data, ts, filename=None):
+    def save(self, data=None, filename=None, ext='aedat'):
         if filename is None:
             filename = self.filename
+        if data is None:
+            data = aedata(self)
+        if ext is 'aedat':
+            # unpack our 'data'
+            ts = data.ts
+            data = data.pack()
 
-        with open(filename, 'w') as f:
-            for item in self.header:
-                f.write(item)
-            print
-            print
-            no_items = len(data)
-            for i in range(no_items):
-                f.write(hex(int(data[i]))[2:].zfill(8).decode('hex'))
-                f.write(hex(int(ts[i]))[2:].zfill(8).decode('hex'))
+            with open(filename, 'w') as f:
+                for item in self.header:
+                    f.write(item)
+                print
+                print
+                no_items = len(data)
+                for i in range(no_items):
+                    f.write(hex(int(data[i]))[2:].zfill(8).decode('hex'))
+                    f.write(hex(int(ts[i]))[2:].zfill(8).decode('hex'))
+
     def unpack(self):
         noData = len(self.data)
 
@@ -90,7 +96,30 @@ class aedata(object):
             self.x, self.y, self.t = aedata.x, aedata.y, aedata.t
             self.ts = ae_file.ts
         else:
-            self.x, self.y, self.t, self.ts = [],[],[],[]
+            self.x, self.y, self.t, self.ts = np.array([]),np.array([]),np.array([]),np.array([])
+
+    def __getitem__(self, item):
+        rtn = aedata()
+        rtn.x = self.x[item]
+        rtn.y = self.y[item]
+        rtn.t = self.t[item]
+        rtn.ts= self.ts[item]
+        return rtn
+
+    def __setitem__(self, key, value):
+        self.x[key] = value.x
+        self.y[key] = value.y
+        self.t[key] = value.t
+        self.ts[key] = value.ts
+
+    def __delitem__(self, key):
+        self.x = np.delete(self.x,  key)
+        self.y = np.delete(self.y,  key)
+        self.t = np.delete(self.t,  key)
+        self.ts = np.delete(self.ts,  key)
+
+    def save_to_mat(self, filename):
+        scipy.io.savemat(filename, {'X':self.x, 'Y':self.y, 't': self.t, 'ts': self.ts})
 
     def pack(self):
         noData = len(self.x)
@@ -190,3 +219,13 @@ def create_pngs(data,prepend,path="",step=3000,dim=(128,128)):
 
         start += step
         end += step
+
+def concatenate(a_tuple):
+    rtn = aedata()
+    rtn.x = np.concatenate(tuple([a_tuple[i].x for i in range(len(a_tuple))]))
+    rtn.y = np.concatenate(tuple([a_tuple[i].y for i in range(len(a_tuple))]))
+    rtn.t = np.concatenate(tuple([a_tuple[i].t for i in range(len(a_tuple))]))
+    rtn.ts = np.concatenate(tuple([a_tuple[i].ts for i in range(len(a_tuple))]))
+    return rtn
+
+    # np.concatenate(a_tuple)
