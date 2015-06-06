@@ -10,12 +10,25 @@ from distutils.core import setup
 
 setup(name='paer',
     version='0.01',
-    description='Python Address Event Representation (AER) Library',
     author="Dario Magliocchetti-Lombi",
     author_email="darioml1911@gmail.com",
+    url="https://github.com/darioml/pAER-python-aer-lib",
+    description='Python Address Event Representation (AER) Library',
+    long_description='This package provides tools required to visulate, manipulate and use address event representational data (.aedat format). ',
     package_dir={"paer" : "src"},
     packages=["paer"],
+    license="GPL 2.0",
+    classifiers=[
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Environment :: Console",
+        "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Development Status :: 2 - Pre-Alpha"
+    ],
     install_requires=[
         'numpy',
+        'scipy',
         'matplotlib'
     ])
