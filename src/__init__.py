@@ -21,15 +21,15 @@ class aefile(object):
     def read(self):
         with open(self.filename, 'r') as f:
             line = f.readline()
-            while (line[0] == '#'):
+            while line[0] == '#':
                 self.header.append(line)
-                if (line[0:9] == '#!AER-DAT'):
+                if line[0:9] == '#!AER-DAT':
                     aer_version = line[9];
-                current = f.tell();
+                current = f.tell()
                 line = f.readline()
 
 
-            if (aer_version != '2'):
+            if aer_version != '2':
                 raise Exception('Invalid AER version. Expected 2, got %s' % aer_version)
 
             f.seek(0,2)
