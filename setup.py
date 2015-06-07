@@ -9,7 +9,7 @@ Description: Setup and install TD algorithms.
 from distutils.core import setup
 
 setup(name='python-aer',
-    version='0.1.1',
+    version='0.1.2',
     author="Dario Magliocchetti",
     author_email="darioml1911@gmail.com",
     url="https://github.com/darioml/pAER-python-aer-lib",
@@ -27,15 +27,9 @@ setup(name='python-aer',
         "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha"
     ],
-    requires=[
-        'matplotlib(>=1.4.0)',
-        'numpy(>=1.4.1)',
-        'scipy(>=0.13.0)',
-        'Pillow(>=2.8.0)'
-    ],
-    # install_requires=[
-    #     'numpy',
-    #     'scipy',
-    #     'matplotlib'
-    # ]
-      )
+    install_requires=[
+        'numpy',
+        'scipy',
+        'matplotlib'
+    ]
+)
