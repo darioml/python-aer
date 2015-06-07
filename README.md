@@ -1,7 +1,14 @@
 # python-aer-lib
 Set of functions to read AER data freely in python (aedat extention) 
 
+## Install
 
-# NOTE
+Dependencies (all via pip)
+- SciPy
+- NumPy
+- matplotlib
+- Pillow
 
-This is currently used only locally and cannot be installed with pip (or anything else). Future commits will allow for installation via pip, once personal upcoming deadlines are met! 
+`pip install git+git://github.com/darioml/pAER-python-aer-lib`
+
+***Coming to PyPI soon***
