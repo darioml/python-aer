@@ -27,6 +27,12 @@ setup(name='python-aer',
         "Operating System :: OS Independent",
         "Development Status :: 3 - Alpha"
     ],
+    requires=[
+        'matplotlib(>=1.4.0)',
+        'numpy(>=1.4.1)',
+        'scipy(>=0.13.0)',
+        'Pillow(>=2.8.0)'
+    ],
     # install_requires=[
     #     'numpy',
     #     'scipy',
